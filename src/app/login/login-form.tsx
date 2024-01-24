@@ -13,10 +13,11 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { FieldValues, useForm } from "react-hook-form"
 import { useSession } from "src/components/SessionProvider"
-import { authenticate } from "src/lib/authentication/authenticate"
+import { useAuthentication } from "src/lib/authentication/authenticate"
 
 export default function LoginPage() {
   const { session, setSession } = useSession()
+  const { authenticate } = useAuthentication()
   const router = useRouter()
   const [apiError, setApiError] = useState<string>("")
   const {

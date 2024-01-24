@@ -54,3 +54,8 @@ yarn start
 ### Running Tests
 
 - **Unit and integration tests**: Run Jest tests using `yarn test`. Use `yarn test:watch` for a smoother development experience.
+
+
+## Notes
+- React Context has been used to store session and so it's intended that at refresh, the session is gone
+- Async function was simulated upon logging in using delay
