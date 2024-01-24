@@ -9,12 +9,14 @@ import TableContainer from "@mui/material/TableContainer"
 import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import { useSelector } from "react-redux"
+import { useSession } from "src/components/SessionProvider"
 import { removeUser } from "src/lib/redux/features/userSlice"
 import { useAppDispatch } from "src/lib/redux/hooks"
 import type { RootState } from "src/lib/redux/store"
 import { TUser } from "../types/user"
 
 export default function UserTable() {
+  const { session } = useSession()
   const dispatch = useAppDispatch()
   const users = useSelector((state: RootState) => state.users.userList || [])
 
@@ -48,7 +50,12 @@ export default function UserTable() {
               <TableCell>{getFullName(user)}</TableCell>
               <TableCell>{user.position}</TableCell>
               <TableCell>
-                <Button onClick={() => handleRemoveUser(user)}>Remove</Button>
+                <Button
+                  onClick={() => handleRemoveUser(user)}
+                  disabled={session?.username === user.username && session?.branchId === user.branchId}
+                >
+                  Remove
+                </Button>
               </TableCell>
             </TableRow>
           ))}
